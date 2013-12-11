@@ -1,0 +1,54 @@
+ZSH=$HOME/.oh-my-zsh
+ZSH_THEME="robbyrussell"
+plugins=(git)
+
+source $ZSH/oh-my-zsh.sh
+
+export PATH=/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games
+autoload -U colors && colors
+PS1="%{$fg[red]%}%n%{$reset_color%}@%{$fg[blue]%}%m %{$reset_color%}in%  %{$fg[yellow]%}%~ %{$reset_color%}%% "
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+
+# alias
+# alias sc="screen -S"
+# alias s="screen"
+# alias sl="screen -list"
+# alias sr="screen -r"
+alias tmux="tmux -2"
+alias free="free -m"
+alias tn="tmux new"
+alias tl="tmux ls"
+alias ta="tmux attach"
+alias tks="tmux kill-session"
+alias cp="rsync -aP"
+alias minicom="minicom -m"
+
+export WORKON_HOME=$HOME/.virtualenvs
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python
+export VIRTUALENVWRAPPER_VIRTUALENV_ARGS='--no-site-packages'
+export PIP_VIRTUALENV_BASE=$WORKON_HOME
+export PIP_RESPECT_VIRTUALENV=true
+
+# Java
+export JAVA_HOME=/usr/lib/jvm/java-7-sun
+export JRE_HOME=${JAVA_HOME}/jre
+export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib
+export PATH=${JAVA_HOME}/bin:$PATH
+
+# Android SDK
+export ANDROID_SDK=/home/cloverstd/Android/android-sdk-linux
+export PATH=$ANDROID_SDK/platform-tools:$ANDROID_SDK/tools:$PATH
+
+if [[ -r /usr/local/bin/virtualenvwrapper.sh ]]; then
+    source /usr/local/bin/virtualenvwrapper.sh
+else
+    echo "WARNING: Can't find virtualenvwrapper.sh"
+fi
+source ~/.zsh/git-prompt/zshrc.sh
+PROMPT='%{$fg[red]%}%n%{$reset_color%}@%{$fg[blue]%}%m %{$reset_color%}in%  %{$fg[yellow]%}%~ %{$reset_color%}%%$(git_super_status) '
+export PYTHONSTARTUP=~/.pythonrc
+
+# arm-linux-gcc
+export PATH=$PATH:~/arm/arm-2013.05/bin
+export PATH=$PATH:/home/cloverstd/arm/toolschain/3.4.1/bin
